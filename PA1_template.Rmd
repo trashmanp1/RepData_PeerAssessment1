@@ -1,17 +1,57 @@
 # Reproducible Research: Peer Assessment 1
+========================================
+  by Pedro Rebelo  
+github repo with RMarkdown source code:
+ https://github.com/trashmanp1/RepData_PeerAssessment1  
+SHA-1 hash
 
 
 ## Loading and preprocessing the data
+=====================================
+Loading the data is easy, just set the work directory to the directory where data is, unzip the data and load it
 
-
+```{r}
+setwd("/Users/pedrorebelo/RepData_PeerAssessment1")#path to directory where data is 
+unzip("activity.zip")
+dados <- read.csv("activity.csv")
+```
 
 ## What is mean total number of steps taken per day?
+Because in a day there are ``r (24*60)/5`` periods of 5 minutes, we must agregate the result by day, before take the mean and median:
+```{r} 
+passos_por_dia <- aggregate(dados[,"steps"],by=as.list(dados["date"]),FUN=sum,na.rm=TRUE)
+names(passos_por_dia) <- c("date","steps")
+media<-round(mean(passos_por_dia$steps)) #integer number of steps 
+mediana<-median(passos_por_dia$steps)
+```
+ The general distribution is given by the hystogram:
+```{r} 
+hist(passos_por_dia$steps,breaks=round(log2(dim(passos_por_dia)[1])+1), #Sturges rule
+      xlab="number of steps",
+      main="Total number of steps per day") 
+```
 
-
+so, the mean is ``r media``steps per day, and the median is ``r mediana`` steps per day.
 
 ## What is the average daily activity pattern?
+We can get the number of steps for the 5 minute intervals averaged over all  days
 
+```{r} 
+passos_por_5_min <- aggregate(dados[,"steps"],by = as.list(dados["interval"]),
+                              FUN = mean, na.rm=TRUE)
+plot(passos_por_5_min, type = "l",
+      xlab="time (min)",
+      ylab="mean steps",
+      main="Daily 5 min average steps") 
+```
+ 
+ The 5-minute interval, on average across all the days in the dataset that contains the 
 
+```{r} 
+maximo<-passos_por_5_min$interval[which.max(passos_por_5_min$x)]
+```
+
+maximum number of steps begin at ``r maximo`` min.
 
 ## Imputing missing values
 
