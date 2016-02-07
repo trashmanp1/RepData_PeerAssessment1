@@ -131,7 +131,7 @@ n_mediana&lt;-round(median(n_passos_por_dia$steps))#integer number of steps</cod
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
-<p>Based on the next figure, we see that the begining of the day on a weekend have less activity then a weekday but have more activity along the day.</p>
+<p>Based on the next figure, we see that a weekend have more activity that a weekday.</p>
 <pre class="r"><code>#create a new factor from date
 wd &lt;- function(date) {
     if (weekdays(as.Date(date)) %in% c(&quot;Saturday&quot;, &quot;Sunday&quot;)) {

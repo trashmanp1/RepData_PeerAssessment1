@@ -95,7 +95,7 @@ and the new mean is ``r n_media`` steps per day, and the new median is ``r n_med
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-Based on the next figure, we see that the begining of the day on a weekend have less activity then a weekday but have more activity along the day.
+Based on the next figure, we see that a weekend have more activity that a weekday.
 
 ```{r} 
 #create a new factor from date
