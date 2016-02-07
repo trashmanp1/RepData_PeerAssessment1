@@ -1,18 +1,20 @@
+Reproducible Research: Peer Assessment 1
 ---
-output: pdf_document
----
-# Reproducible Research: Peer Assessment 1
+author: "Pedro Rebelo"
 
-by Pedro Rebelo  
+date: "7 Feb 2016"
+
 github repo with RMarkdown source code:
 https://github.com/trashmanp1/RepData_PeerAssessment1  
+output: html_document
+---
 
 ## Loading and preprocessing the data
 
 Loading the data is easy, just set the work directory to the directory where data is, unzip the data and load it
 
 ```{r}
-setwd("/Users/pedrorebelo/RepData_PeerAssessment1")#path to directory where data is 
+setwd("/Users/trashman/Documents/RepData_PeerAssessment1")#path to directory where data is 
 unzip("activity.zip")
 dados <- read.csv("activity.csv")
 ```
@@ -41,7 +43,7 @@ We can get the number of steps for the 5 minute intervals averaged over all  day
 passos_por_5_min <- aggregate(dados[,"steps"],by = as.list(dados["interval"]),
                               FUN = mean, na.rm=TRUE)
 plot(passos_por_5_min, type = "l",
-      xlab="time (min)",
+      xlab="time interval",
       ylab="mean steps",
       main="Daily 5 min average steps") 
 ```
@@ -52,7 +54,7 @@ plot(passos_por_5_min, type = "l",
 maximo<-passos_por_5_min$interval[which.max(passos_por_5_min$x)]
 ```
 
-maximum number of steps begin at ``r maximo`` min.
+maximum number of steps ocurs at ``r maximo``.
 
 ## Imputing missing values
 
@@ -64,7 +66,7 @@ percentagem<-n_falhas/tamanho*100
 
 The total sum of missing values is ``r n_falhas`` that corresponds ``r percentagem``% of the total data points.
 
-If we choose the mean to fill the points without registration, we do not change the overall amean, but we will decrease the variance of the overall data. On the other hand if we use the median it will not only decrease the variance but also change the overall mean. If we use zero for the missing values we increse the variance and decrease the overall mean.Because the median of all 5 min intervall is zero, i chose zero. So i will increse the dispersion of data and decrese the mean.
+If we choose the mean to fill the points without registration, we do not change the overall mean, but we will decrease the variance of the overall data. On the other hand if we use the median it will not only decrease the variance but also change the overall mean. If we use zero for the missing values we increse the variance and decrease the overall mean.Because the median of all 5 min intervall is zero, i chose zero. So i will increse the dispersion of data and decrese the mean.
 
 ```{r} 
 dados_martelados<-dados
