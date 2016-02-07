@@ -9,6 +9,9 @@ https://github.com/trashmanp1/RepData_PeerAssessment1
 output: html_document
 ---
 
+This is project 1 of Reproducible Research course by Coursera (https://www.coursera.org/learn/reproducible-research)
+The objective of this work is to make a Literate Statistical Program that loads a data set, make some statistical analysis in a human and computer readable form. The data set can be obtained here: https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip
+
 ## Loading and preprocessing the data
 
 Loading the data is easy, just set the work directory to the directory where data is, unzip the data and load it
@@ -112,7 +115,7 @@ steps_wd<-aggregate(dados[,"steps"],by=as.list(c(dados["wd"],dados["interval"]))
 library(ggplot2)
 graph <- ggplot(steps_wd,aes(interval,x))+ theme_bw()
 graph <- graph + geom_line() + facet_wrap(~ wd, nrow = 2) 
-graph <- graph + xlab("Interval (min)") 
-graph <- graph + ylab("number of steps")
+graph <- graph + xlab("Interval number") 
+graph <- graph + ylab("Number of steps")
 graph
 ```
